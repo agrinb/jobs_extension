@@ -1,19 +1,18 @@
-var Keywords = []
+var Keywords = [];
 
 $(document).ready(function(){
   $('.log-twitter').on('click', function(event){
-    console.log($('#keyword').val())
+    console.log($('#keyword').val());
     if($('#keyword').val().length > 2 ){
-      Keywords.push($('#keyword').val()
-      console.log($('#keyword').val())
-    }
-  })
+      Keywords.push($('#keyword').val())
+    };
+  });
 
   while (Keywords > 0) {
     var KeywordsOnPage = $.map(Keywords, function( keyword, index) {
       return $('<li>keyword</li>')
     })
     $('.keyword-list').find('ul').html(KeywordsOnPage);
-  }
+  };
+});
 
-})
