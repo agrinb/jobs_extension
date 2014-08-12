@@ -1,15 +1,43 @@
 {
   "manifest_version": 2,
-
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvQlQmJhXT5Wz62s5QrxtFYqS/KycoqFRyqV05HFCWtOr/ClJSTvUI5JLopwA2Hw9MFC6lsSxH00FuFvkIpWLfRGpxdoYwkO2JCiQb4RlB+rxLchjBWIe/+OE31Aiw3zbIm1Fqp2in8/3FzmM+C5BTK5rfrfUmIMZcYo8syq4QaaYYQ1pHQwoXujY9FSyTSqnhbp9W62icHzbb44GY+r5tGvPLw0tfrB65qER1enM/UX3nrCq8bU606HkW4jMUoDYSh+kXDfqBCM9AOiQRHBqt6tlvc0VPzwfNtgoEAjG2rmk5MYg4V7EPQDsfxgDEbEyUKSP8yzWnKDtZi8xdg/qIQIDAQAB",
   "name": "Jobs",
   "description": "This extension helps you find a job",
   "version": "1.0",
-
   "permissions": [
-          "tabs"
-        ],
+          "tabs",
+          "identity",
+          "https://accounts.google.com/*",
+          "https://www.googleapis.com/*"],
+  "oauth2": {
+    "client_id": "633513668424-avj1eu477g302go9jc5dd0ff3ll4hgi3.apps.googleusercontent.com",
+    "scopes": ["https://www.googleapis.com/auth/plus.login"]
+  },
   "browser_action": {
     "default_icon": "icon.png",
     "default_popup": "index.html"
   }
+}
+
+
+{
+  "name": "Google Mail",
+  "description": "Read your gmail",
+  "version": "1",
+  "app": {
+    "urls": [
+      "*://mail.google.com/mail/",
+      "*://www.google.com/mail/"
+    ],
+    "launch": {
+      "web_url": "http://mail.google.com/mail/"
+    }
+  },
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "unlimitedStorage",
+    "notifications"
+  ]
 }
