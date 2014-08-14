@@ -39,9 +39,9 @@ $(document).ready(function(){
 
 
 
-  $( ".form-2" ).submit(function( event ) {
-  event.preventDefault();
-  console.log(keywords)
+  // $( ".form-2" ).submit(function( event ) {
+  // event.preventDefault();
+  // console.log(keywords)
   //   var form = $(this);
   //   $.ajax('/companies', {
   //     timeout: 3000,
@@ -55,6 +55,6 @@ $(document).ready(function(){
   //       },
   //       contentType: 'application/json'
   //   });
-  });
+  // });
 });
 
