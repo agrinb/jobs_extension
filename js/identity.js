@@ -91,17 +91,41 @@
   // Code updating the user interface, when the user information has been
   // fetched or displaying the error.
   var user_info = null
+  var user_uid = null
+  var user_email = null
 
   function onUserInfoFetched(error, status, response) {
     if (!error && status == 200) {
       changeState(STATE_AUTHTOKEN_ACQUIRED);
       console.log(response);
       user_info = JSON.parse(response);
-      console.log(user_info)
+      user_uid = user_info.id;
+      getUserEmail(user_uid);
+
       //populateUserInfo(user_info);
     } else {
       changeState(STATE_START);
     }
+  }
+
+   function onUserEmailFecthed(error, status, response) {
+    console.log(response)
+    if (!error && status == 200) {
+      changeState(STATE_AUTHTOKEN_ACQUIRED);
+      console.log(response);
+      user_info = JSON.parse(response);
+      user_email = user_info.email
+
+    } else {
+      changeState(STATE_START);
+    }
+  }
+
+  function getUserEmail(user_uid) {
+    xhrWithAuth('GET',
+                'https://www.googleapis.com/plus/v1/people/'+user_uid+'?fields=emails',
+                true,
+                onUserEmailFecthed());
   }
 
   function populateUserInfo(user_info) {

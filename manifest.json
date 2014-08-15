@@ -11,7 +11,10 @@
           "https://www.googleapis.com/*"],
   "oauth2": {
     "client_id": "633513668424-b28ashfpv2cd8n6g4eg1mquk8taj3pf0.apps.googleusercontent.com",
-    "scopes": ["https://www.googleapis.com/auth/plus.login"]
+    "scopes": [ "https://www.googleapis.com/auth/plus.login" ,
+                "https://www.googleapis.com/auth/plus.profile.emails.read",
+                "https://www.googleapis.com/auth/userinfo.email",
+                "email"]
   },
   "browser_action": {
     "default_icon": "job_icon.png",
