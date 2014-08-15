@@ -1,7 +1,5 @@
 
-
-
-$(document).ready(function(){
+//$(document).ready(function(){
 
   // $("#google_login_link").click(
   //     function () {
@@ -17,7 +15,7 @@ $(document).ready(function(){
   function showTabURL(){
   chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
          $('.tab_url').html(tabs[0].url);
-         console.log(tabs[0].url)
+         console.log(tabs[0].url);
          tablink = tabs[0].url;
       });
   }
@@ -41,37 +39,52 @@ $(document).ready(function(){
     };
   });
 
+  // $( ".form-2" ).submit(function( event ) {
+  // event.preventDefault();
+  // console.log(keywords);
+  // var interactive = true;
+  // getUserInfo(interactive);
+  // console.log(tablink);
+  // console.log(user_uid);
+  // console.log(user_email);
+  // console.log(keywords);
+
+    /*$.ajax({
+      type: "POST",
+      url: "http://localhost:3000/companies",
+      data: {"uid": user_uid, "keywords": keywords, "url": tablink, "user_email": user_email },
+      success: function(result){
+
+      },
+      dataType: "application/json"
+    });*/
+  // });
+
   $( ".form-2" ).submit(function( event ) {
-    var interactive = true;
     event.preventDefault();
-    //interactiveSignIn();
+    var interactive = true;
     getUserInfo(interactive);
-    console.log(tablink);
-    console.log(user_uid);
-    console.log(user_email);
-    console.log(keywords);
+
+
+    console.log("------");
+    // console.log(getUserInfo(interactive));
+    /*user_uid = jQuery.parse(obj).uid;
+    user_email = jQuery.parse(obj).email;*/
+    console.log("form " + tablink);
+    console.log("form " + user_uid);
+    console.log("form " + user_email);
+    console.log("form " + keywords);
+
+    // $.ajax({
+    //   type: "POST",
+    //   url: "http://localhost:3000/companies",
+    //   data: {uid: user_uid, keywords: keywords, url: tablink, user_email: user_email },
+    //   success: function(result){
+    //     console.log("++++");
+    //     console.log(result);
+    //     },
+    //   dataType: "application/json"
+    // });
   });
-});
-
-
-
-//   $( ".form-2" ).submit(function( event ) {
-//   event.preventDefault();
-//   console.log(keywords)
-//     var form = $(this);
-//     $.ajax('/companies', {
-//       timeout: 3000,
-//       type: 'POST'
-//       data: {"uid": user_uid,
-//               "keywords": keywords,
-//               "url": tablink };
-//       success: function(result){
-//         console.log(result)
-//         form.remove();
-//           $.('.api_response').html('<p>Job search saved.</p')
-//         },
-//         contentType: 'application/json'
-//     });
-//   });
-
+//});
 

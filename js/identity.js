@@ -1,12 +1,14 @@
 'use strict';
 
 // var googlePlusUserLoader = (function() {
-
+  //var user_info, user_uid, user_email;
   var STATE_START=1;
   var STATE_ACQUIRING_AUTHTOKEN=2;
   var STATE_AUTHTOKEN_ACQUIRED=3;
 
   var state = STATE_START;
+
+  var user_info = null, user_uid = null, user_email = null;
 
   // var signin_button, xhr_button, revoke_button, user_info_div;
 
@@ -40,10 +42,8 @@
      }
   }
 
-  /*var user_info = null;
-  var user_uid = null;
-  var user_email = null;*/
-  var user_info, user_uid, user_email;
+
+
 
   // @corecode_begin getProtectedData
   function xhrWithAuth(method, url, interactive, callback) {
@@ -97,6 +97,7 @@
   // Code updating the user interface, when the user information has been
   // fetched or displaying the error.
 
+
   function onUserInfoFetched(error, status, response) {
     if (!error && status == 200) {
       changeState(STATE_AUTHTOKEN_ACQUIRED);
@@ -105,11 +106,29 @@
       user_email = user_info.emails[0]["value"];
       console.log(user_uid);
       console.log(user_email);
+
+/*      var person = { uid: user_info.id, email: user_info.emails[0]["value"]};*/
+
+/*      return JSON.stringify(person);*/
+
+        //move it inside here
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/companies",
+        data: {uid: user_uid, keywords: keywords, url: tablink, user_email: user_email },
+        success: function(result){
+          console.log("++++");
+          console.log(result);
+          },
+        dataType: "application/json"
+      });
+
+
+        /*return { uid: user_info.id, email: user_info.emails[0]["value"]};*/
     } else {
       changeState(STATE_START);
     }
   }
-
 
   function populateUserInfo(user_info) {
     user_info_div.innerHTML = "Hello " + user_info.displayName;
