@@ -222,12 +222,6 @@
   // };
 
 
-  $( ".form-2" ).submit(function( event ) {
-  var interactive = true
-  event.preventDefault();
-  //interactiveSignIn();
-  getUserInfo(interactive);
-  });
 
 // })();
 
