@@ -79,7 +79,7 @@
         chrome.identity.removeCachedAuthToken({ token: access_token },
                                               getToken);
       } else {
-        onUserEmailFecthed(null, this.status, this.response);
+        // onUserEmailFecthed(null, this.status, this.response);
         onUserInfoFetched(null, this.status, this.response);
       }
     }
@@ -102,30 +102,14 @@
       changeState(STATE_AUTHTOKEN_ACQUIRED);
       user_info = JSON.parse(response);
       user_uid = user_info.id;
-      console.log(user_uid);
-    } else {
-      changeState(STATE_START);
-    }
-  }
-
-
-   function onUserEmailFecthed(error, status, response) {
-    if (!error && status == 200) {
-      changeState(STATE_AUTHTOKEN_ACQUIRED);
-      user_info = JSON.parse(response);
       user_email = user_info.emails[0]["value"];
+      console.log(user_uid);
       console.log(user_email);
     } else {
       changeState(STATE_START);
     }
   }
 
-  function getUserEmail(user_uid) {
-    xhrWithAuth('GET',
-                'https://www.googleapis.com/plus/v1/people/'+user_uid+'?fields=emails',
-                true,
-                onUserEmailFecthed());
-  }
 
   function populateUserInfo(user_info) {
     user_info_div.innerHTML = "Hello " + user_info.displayName;
@@ -241,11 +225,8 @@
   $( ".form-2" ).submit(function( event ) {
   var interactive = true
   event.preventDefault();
-  interactiveSignIn();
+  //interactiveSignIn();
   getUserInfo(interactive);
-  console.log('click');
-
-  //getUserInfo(interactive)
   });
 
 // })();
