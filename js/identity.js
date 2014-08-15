@@ -40,6 +40,11 @@
      }
   }
 
+  /*var user_info = null;
+  var user_uid = null;
+  var user_email = null;*/
+  var user_info, user_uid, user_email;
+
   // @corecode_begin getProtectedData
   function xhrWithAuth(method, url, interactive, callback) {
     var access_token;
@@ -74,7 +79,8 @@
         chrome.identity.removeCachedAuthToken({ token: access_token },
                                               getToken);
       } else {
-        callback(null, this.status, this.response);
+        onUserEmailFecthed(null, this.status, this.response);
+        onUserInfoFetched(null, this.status, this.response);
       }
     }
   }
@@ -90,32 +96,25 @@
 
   // Code updating the user interface, when the user information has been
   // fetched or displaying the error.
-  var user_info = null
-  var user_uid = null
-  var user_email = null
 
   function onUserInfoFetched(error, status, response) {
     if (!error && status == 200) {
       changeState(STATE_AUTHTOKEN_ACQUIRED);
-      console.log(response);
       user_info = JSON.parse(response);
       user_uid = user_info.id;
-      getUserEmail(user_uid);
-
-      //populateUserInfo(user_info);
+      console.log(user_uid);
     } else {
       changeState(STATE_START);
     }
   }
 
+
    function onUserEmailFecthed(error, status, response) {
-    console.log(response)
     if (!error && status == 200) {
       changeState(STATE_AUTHTOKEN_ACQUIRED);
-      console.log(response);
       user_info = JSON.parse(response);
-      user_email = user_info.email
-
+      user_email = user_info.emails[0]["value"];
+      console.log(user_email);
     } else {
       changeState(STATE_START);
     }

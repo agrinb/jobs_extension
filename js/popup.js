@@ -29,23 +29,23 @@ $(document).ready(function(){
 
 
 
-  $( ".form-2" ).submit(function( event ) {
-  event.preventDefault();
-  console.log(keywords)
-    var form = $(this);
-    $.ajax('/companies', {
-      timeout: 3000,
-      type: 'POST'
-      data: {"uid": user_uid,
-              "keywords": keywords,
-              "url": tablink };
-      success: function(result){
-        console.log(result)
-        form.remove();
-          $.('.api_response').html('<p>Job search saved.</p')
-        },
-        contentType: 'application/json'
-    });
-  });
+//   $( ".form-2" ).submit(function( event ) {
+//   event.preventDefault();
+//   console.log(keywords)
+//     var form = $(this);
+//     $.ajax('/companies', {
+//       timeout: 3000,
+//       type: 'POST'
+//       data: {"uid": user_uid,
+//               "keywords": keywords,
+//               "url": tablink };
+//       success: function(result){
+//         console.log(result)
+//         form.remove();
+//           $.('.api_response').html('<p>Job search saved.</p')
+//         },
+//         contentType: 'application/json'
+//     });
+//   });
 });
 
