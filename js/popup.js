@@ -67,7 +67,7 @@
 
 
     console.log("------");
-    // console.log(getUserInfo(interactive));
+    console.log(getUserInfo(interactive));
     /*user_uid = jQuery.parse(obj).uid;
     user_email = jQuery.parse(obj).email;*/
     console.log("form " + tablink);

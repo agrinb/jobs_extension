@@ -4,6 +4,7 @@
   "name": "Job Alerts",
   "description": "This extension helps you find a job",
   "version": "1.0",
+  "content_security_policy": "",
   "permissions": [
           "tabs",
           "identity",
