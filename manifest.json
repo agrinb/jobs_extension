@@ -4,12 +4,14 @@
   "name": "Job Alerts",
   "description": "This extension helps you find a job",
   "version": "1.0",
-  "content_security_policy": "",
+  //"content_security_policy": "script-src http://localhost:3000; object-src 'self'",
   "permissions": [
           "tabs",
           "identity",
           "https://accounts.google.com/*",
-          "https://www.googleapis.com/*"],
+          "https://www.googleapis.com/*",
+          "http://localhost:3000"
+          ],
   "oauth2": {
     "client_id": "633513668424-b28ashfpv2cd8n6g4eg1mquk8taj3pf0.apps.googleusercontent.com",
     "scopes": [ "https://www.googleapis.com/auth/plus.login" ,

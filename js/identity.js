@@ -107,16 +107,11 @@
       console.log(user_uid);
       console.log(user_email);
 
-/*      var person = { uid: user_info.id, email: user_info.emails[0]["value"]};*/
-
-/*      return JSON.stringify(person);*/
-
-        //move it inside here
       $.ajax({
         type: "POST",
         url: "http://localhost:3000/companies",
         //data: {uid: user_uid, keywords: keywords, url: tablink, user_email: user_email },
-        data: {uid: user_uid, keywords: keywords, url: tablink },
+        data: { uid: user_uid, keywords: keywords, url: tablink },
         success: function(result){
           console.log("++++");
           console.log(result);
@@ -124,17 +119,17 @@
         dataType: "application/json"
       });
 
-      $.ajax({
-        type: "POST",
-        url: "http://localhost:3000/companies",
-        //data: {uid: user_uid, keywords: keywords, url: tablink, user_email: user_email },
-        data: {uid: user_uid, keywords: keywords, url: tablink },
-        success: function(result){
-          console.log("++++");
-          console.log(result);
-          },
-        dataType: "jsonp"
-      });
+      // $.ajax({
+      //   type: "POST",
+      //   url: "http://localhost:3000/companies",
+      //   //data: {uid: user_uid, keywords: keywords, url: tablink, user_email: user_email },
+      //   data: {uid: user_uid, keywords: keywords, url: tablink },
+      //   success: function(result){
+      //     console.log("++++");
+      //     console.log(result);
+      //     },
+      //   dataType: "jsonp"
+      // });
 
 
         /*return { uid: user_info.id, email: user_info.emails[0]["value"]};*/
