@@ -103,7 +103,7 @@
         type: "POST",
         url: "http://localhost:3000/companies",
         //data: {uid: user_uid, keywords: keywords, url: tablink, user_email: user_email },
-        data: { uid: user_uid, keywords: keywords, url: tablink, company: url_domain(tablink)},
+        data: { uid: user_uid, keywords: keywords, url: tablink, name: url_domain(tablink)},
         success: function(result){
           console.log(result);
           },
