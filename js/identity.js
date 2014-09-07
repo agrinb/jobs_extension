@@ -10,15 +10,8 @@
 
   var user_info = null, user_uid = null, user_email = null;
 
-  // var signin_button, xhr_button, revoke_button, user_info_div;
 
- // function disableButton(button) {
- //    button.setAttribute('disabled', 'disabled');
- //  }
 
- //  function enableButton(button) {
- //    button.removeAttribute('disabled');
- //  }
 
   function changeState(newState) {
     state = newState;
@@ -42,6 +35,11 @@
      }
   }
 
+  function url_domain(url) {
+  var    a      = document.createElement('a');
+         a.href = url;
+  return a.hostname;
+  }
 
 
 
@@ -91,50 +89,30 @@
                 interactive,
                 onUserInfoFetched);
   }
-  // @corecode_end getProtectedData
-
-
-  // Code updating the user interface, when the user information has been
-  // fetched or displaying the error.
 
 
   function onUserInfoFetched(error, status, response) {
     if (!error && status == 200) {
-      changeState(STATE_AUTHTOKEN_ACQUIRED);
+      //changeState(STATE_AUTHTOKEN_ACQUIRED);
       user_info = JSON.parse(response);
       user_uid = user_info.id;
       user_email = user_info.emails[0]["value"];
-      console.log(user_uid);
-      console.log(user_email);
+
 
       $.ajax({
         type: "POST",
         url: "http://localhost:3000/companies",
         //data: {uid: user_uid, keywords: keywords, url: tablink, user_email: user_email },
-        data: { uid: user_uid, keywords: keywords, url: tablink },
+        data: { uid: user_uid, keywords: keywords, url: tablink, company: url_domain(tablink)},
         success: function(result){
-          console.log("++++");
           console.log(result);
           },
         dataType: "application/json"
       });
 
-      // $.ajax({
-      //   type: "POST",
-      //   url: "http://localhost:3000/companies",
-      //   //data: {uid: user_uid, keywords: keywords, url: tablink, user_email: user_email },
-      //   data: {uid: user_uid, keywords: keywords, url: tablink },
-      //   success: function(result){
-      //     console.log("++++");
-      //     console.log(result);
-      //     },
-      //   dataType: "jsonp"
-      // });
 
-
-        /*return { uid: user_info.id, email: user_info.emails[0]["value"]};*/
     } else {
-      changeState(STATE_START);
+      //changeState(STATE_START);
     }
   }
 
@@ -143,50 +121,9 @@
     fetchImageBytes(user_info);
   }
 
-  function fetchImageBytes(user_info) {
-    if (!user_info || !user_info.image || !user_info.image.url) return;
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', user_info.image.url, true);
-    xhr.responseType = 'blob';
-    xhr.onload = onImageFetched;
-    xhr.send();
-  }
-
-  function onImageFetched(e) {
-    if (this.status != 200) return;
-    var imgElem = document.createElement('img');
-    var objUrl = window.webkitURL.createObjectURL(this.response);
-    imgElem.src = objUrl;
-    imgElem.onload = function() {
-      window.webkitURL.revokeObjectURL(objUrl);
-    }
-    user_info_div.insertAdjacentElement("afterbegin", imgElem);
-  }
-
-  // OnClick event handlers for the buttons.
-
-  /**
-    Retrieves a valid token. Since this is initiated by the user
-    clicking in the Sign In button, we want it to be interactive -
-    ie, when no token is found, the auth window is presented to the user.
-
-    Observe that the token does not need to be cached by the app.
-    Chrome caches tokens and takes care of renewing when it is expired.
-    In that sense, getAuthToken only goes to the server if there is
-    no cached token or if it is expired. If you want to force a new
-    token (for example when user changes the password on the service)
-    you need to call removeCachedAuthToken()
-  **/
   function interactiveSignIn() {
     changeState(STATE_ACQUIRING_AUTHTOKEN);
 
-    // @corecode_begin getAuthToken
-    // @description This is the normal flow for authentication/authorization
-    // on Google properties. You need to add the oauth2 client_id and scopes
-    // to the app manifest. The interactive param indicates if a new window
-    // will be opened when the user is not yet authenticated or not.
-    // @see http://developer.chrome.com/apps/app_identity.html
-    // @see http://developer.chrome.com/apps/identity.html#method-getAuthToken
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
       if (chrome.runtime.lastError) {
         console.log(chrome.runtime.lastError);
@@ -228,54 +165,6 @@
         }
     });
   }
-
-//   function createCORSRequest(method, url) {
-//   var xhr = new XMLHttpRequest();
-//   if ("withCredentials" in xhr) {
-
-//     // Check if the XMLHttpRequest object has a "withCredentials" property.
-//     // "withCredentials" only exists on XMLHTTPRequest2 objects.
-//     xhr.open(method, url, true);
-
-//   } else if (typeof XDomainRequest != "undefined") {
-
-//     // Otherwise, check if XDomainRequest.
-//     // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-//     xhr = new XDomainRequest();
-//     xhr.open(method, url);
-
-//   } else {
-
-//     // Otherwise, CORS is not supported by the browser.
-//     xhr = null;
-
-//   }
-//   return xhr;
-// }
-
-// var xhr = createCORSRequest('GET', url);
-// if (!xhr) {
-//   throw new Error('CORS not supported');
-// }
-
-  // return {
-  //   onload: function () {
-  //     signin_button = document.querySelector('#signin');
-  //     signin_button.addEventListener('click', interactiveSignIn);
-
-  //     xhr_button = document.querySelector('#getxhr');
-  //     xhr_button.addEventListener('click', getUserInfo.bind(xhr_button, true));
-
-  //     revoke_button = document.querySelector('#revoke');
-  //     revoke_button.addEventListener('click', revokeToken);
-
-  //     user_info_div = document.querySelector('#user_info');
-
-  //     // Trying to get user's info without signing in, it will work if the
-  //     // application was previously authorized by the user.
-  //     getUserInfo(false);
-  //   }
-  // };
 
 
 
