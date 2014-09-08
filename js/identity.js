@@ -1,39 +1,7 @@
 'use strict';
 
-// var googlePlusUserLoader = (function() {
-  //var user_info, user_uid, user_email;
-  var STATE_START=1;
-  var STATE_ACQUIRING_AUTHTOKEN=2;
-  var STATE_AUTHTOKEN_ACQUIRED=3;
-
-  var state = STATE_START;
 
   var user_info = null, user_uid = null, user_email = null;
-
-
-
-
-  function changeState(newState) {
-    state = newState;
-    switch (state) {
- //      case STATE_START:
- //        enableButton(signin_button);
- //        disableButton(xhr_button);
- //        disableButton(revoke_button);
- //        break;
- //      case STATE_ACQUIRING_AUTHTOKEN:
- //        console.log('Acquiring token...');
- //        disableButton(signin_button);
- //        disableButton(xhr_button);
- //        disableButton(revoke_button);
- //        break;
- //      case STATE_AUTHTOKEN_ACQUIRED:
- //        disableButton(signin_button);
- //        enableButton(xhr_button);
- //        enableButton(revoke_button);
- //        break;
-     }
-  }
 
   function url_domain(url) {
   var    a      = document.createElement('a');
@@ -41,9 +9,6 @@
   return a.hostname;
   }
 
-
-
-  // @corecode_begin getProtectedData
   function xhrWithAuth(method, url, interactive, callback) {
     var access_token;
 
@@ -77,7 +42,6 @@
         chrome.identity.removeCachedAuthToken({ token: access_token },
                                               getToken);
       } else {
-        // onUserEmailFecthed(null, this.status, this.response);
         onUserInfoFetched(null, this.status, this.response);
       }
     }
@@ -90,10 +54,8 @@
                 onUserInfoFetched);
   }
 
-
   function onUserInfoFetched(error, status, response) {
     if (!error && status == 200) {
-      //changeState(STATE_AUTHTOKEN_ACQUIRED);
       user_info = JSON.parse(response);
       user_uid = user_info.id;
       user_email = user_info.emails[0]["value"];
@@ -143,7 +105,6 @@
     chrome.identity.getAuthToken({ 'interactive': false },
       function(current_token) {
         if (!chrome.runtime.lastError) {
-
           // @corecode_begin removeAndRevokeAuthToken
           // @corecode_begin removeCachedAuthToken
           // Remove the local cached token
@@ -167,7 +128,5 @@
   }
 
 
-
-// })();
 
 
