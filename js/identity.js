@@ -14,10 +14,9 @@
 
     var retry = true;
 
-    getToken();
-
     function getToken() {
       chrome.identity.getAuthToken({ interactive: interactive }, function(token) {
+        console.log(intereactive)
         if (chrome.runtime.lastError) {
           callback(chrome.runtime.lastError);
           return;
@@ -45,6 +44,10 @@
         onUserInfoFetched(null, this.status, this.response);
       }
     }
+
+    getToken();
+
+
   }
 
   function getUserInfo(interactive) {

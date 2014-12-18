@@ -9,11 +9,10 @@
           "tabs",
           "identity",
           "https://accounts.google.com/*",
-          "https://www.googleapis.com/*",
-          "http://localhost:3000"
+          "https://www.googleapis.com/*"
           ],
   "oauth2": {
-    "client_id": "633513668424-b28ashfpv2cd8n6g4eg1mquk8taj3pf0.apps.googleusercontent.com",
+    "client_id": "633513668424-avj1eu477g302go9jc5dd0ff3ll4hgi3.apps.googleusercontent.com",
     "scopes": [ "https://www.googleapis.com/auth/plus.login" ,
                 "https://www.googleapis.com/auth/plus.profile.emails.read",
                 "https://www.googleapis.com/auth/userinfo.email",

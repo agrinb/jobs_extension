@@ -14,7 +14,7 @@
 
 
   var keywords = [];
-  $('.log-twitter').on('click', function(event){
+  $('.add-btn').on('click', function(event){
     if($('#keyword').val().length > 2 ){
       keywords.push($('#keyword').val());
       $('#keyword').val("");
@@ -33,8 +33,36 @@
     event.preventDefault();
     var interactive = true;
     getUserInfo(interactive);
-
-
   });
 
+  // Enable pusher logging - don't include this in production
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) {
+      window.console.log(message);
+    }
+  };
+
+  var pusher = new Pusher('2089ef65bd0d820cb915');
+  var channel = pusher.subscribe('1');
+  channel.bind('my_event', function(data) {
+    processJobs(data);
+  });
+
+  function processJobs(data){
+    var list = $("<ul></ul>");
+    for (var i = 0; i < data.length; i++) {
+      var title = data[i]['title'];
+      var url = data[i]['url'];
+      var li = "<li><a href="+url+">"+title+"</a></li>";
+      list = list.append(li);
+    }
+    buildJobResults(list);
+  };
+
+  function buildJobResults(list){
+    $('form').remove('.form-2');
+    $('.main').append(list);
+    $( "ul" ).addClass("job-list");
+    $('.job-list').find('li').addClass("job");
+  };
 
