@@ -3,17 +3,35 @@
 document.addEventListener('DOMContentLoaded', function () {
   alert( "I'm here");
 });
+    
+    
+    var popupPort;
+    chrome.extension.onConnect.addListener(function(port) {
+      popupPort = port;
+
+      popupPort.onDisconnect.addListener(function() {
+        popupPort = undefined;
+      });
+    });
+
+
     var id = 0;
 		var jobs = [];
 	  var pusher = new Pusher('2089ef65bd0d820cb915', {
       disableStats: true
     });
 
+
+
 	  var channel = pusher.subscribe('1');
     channel.bind('my_event', function(data) {
       
     localStorage["jobs"] = JSON.stringify(data);
     console.log("JOBS --" + localStorage["jobs"]);
+    // Send post to popup if connected
+    if (popupPort) {
+      popupPort.postMessage("new data received");
+    }
 
     var item_array = new Array();
     for (var i = 0; i < 10; i++) {
@@ -51,3 +69,4 @@ Pusher.log = function(message) {
     window.console.log(message);
   }
 };
+
