@@ -10,7 +10,8 @@
           "identity",
           "https://accounts.google.com/*",
           "https://www.googleapis.com/*",
-          "notifications"
+          "notifications",
+          "https://js.pusher.com/*"
           ],
   "oauth2": {
     "client_id": "633513668424-avj1eu477g302go9jc5dd0ff3ll4hgi3.apps.googleusercontent.com",
@@ -19,8 +20,12 @@
                 "https://www.googleapis.com/auth/userinfo.email",
                 "email"]
   },
+  "content_security_policy": "script-src 'self' https://js.pusher.com; object-src 'self'",
   "browser_action": {
     "default_icon": "job_icon.png",
     "default_popup": "index.html"
+  },
+  "background": {
+    "page": "background.html"
   }
 }
