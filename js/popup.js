@@ -15,6 +15,7 @@ $(document).ready(function(){
   var keywords = [];
   $('.add-btn').on('click', function(event){
     console.log("JOBS --" + localStorage["jobs"]);
+    init();
     if($('#keyword').val().length > 2 ){
       keywords.push($('#keyword').val());
       $('#keyword').val("");
@@ -38,23 +39,26 @@ $(document).ready(function(){
 
 
 
-  var posts;
   var port = chrome.extension.connect({name: "Job Hunter Connector"});
   
   document.addEventListener('DOMContentLoaded', function () {
-    init();
+    //init();
   });
 
   var init = function() {
-    // posts = document.querySelector(".posts");
-    // // Request most recent Product Hunt posts
+    listings = document.querySelector(".listings");
+      if (localStorage.getItem("jobs") === null) {
+        //...
+      } else {
+        var localListings = JSON.parse(localStorage["jobs"]);
+        for (var i = 0; i < localListings.length; i++) {
+          addListings(localListings[i]);
+        };
+      }
     // $.getJSON("http://realtime-producthunt.herokuapp.com/posts?" + Date.now(), function(posts) {
     // // Reverse posts
     // posts.reverse();
-
-    // for (var i = 0; i < posts.length; i++) {
-    //   addPost(posts[i]);
-    //   };
+      
     // });
 
     // // Listen for realtime updates from background process
@@ -64,13 +68,11 @@ $(document).ready(function(){
     });
   };
 
-  var addPost = function(post) {
-  var postDOM = document.createElement("div"); 
-    postDOM.classList.add("post");
-
-    postDOM.innerHTML += "<h2><a href='" + post.discussion_url + "' target='_blank'>" + post.name + "</a></h2>";
-    postDOM.innerHTML += "<p>" + post.tagline + "</p>";
-    postDOM.innerHTML += "<span class='avatar'><img src='" + post.user.image_url["73px"] + "'></span>";
-
-    posts.insertBefore(postDOM, posts.firstChild);
+  var addListings = function(listing) {    
+    var listingDOM = document.createElement("div");
+  //var listings = [];
+    listingDOM.classList.add("listing");
+    listingDOM.innerHTML += "<h2><a href='" + listing['url'] + "' target='_blank'>" + listing['title'] + "</a></h2>";
+    listingDOM.innerHTML += "<span class='bullet'><img src='bullet.png'></span>";
+    listings.insertBefore(listingDOM, listings.firstChild);
   }
