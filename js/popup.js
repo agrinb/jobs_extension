@@ -9,21 +9,34 @@ $(document).ready(function(){
       });
   }
 
-  showTabURL();
+  showTabURL
+
+  // var keywordList = document.createElement("ul");
+  // var kewordDOM = document.createElement("li");
+  // listingDOM.classList.add("listing");
+  // keywordDOM.innerHTML += 
+
 
 
   var keywords = [];
   $('.add-btn').on('click', function(event){
-    if($('#keyword').val().length > 2 ){
-      keywords.push($('#keyword').val());
-      $('#keyword').val("");
-      for(i = 0; i <= keywords.length; i++ ){
-        var keywordsOnPage = $.map(keywords, function(keyword, index) {
-        return $('<p>'+keyword+'</p>');
-        })
-        $('.keyword-list').html(keywordsOnPage);
+    //$('.listings').slideToggle(400, function(){
+
+
+
+      if($('#keyword').val().length > 2 ){
+        keywords.push($('#keyword').val());
+        $('#keyword').val("");
+        for(i = 0; i <= keywords.length; i++ ){
+          var keywordsOnPage = $.map(keywords, function(keyword, index) {
+          return $('<p>'+keyword+'</p>');
+          })
+          $('.keyword-list').html(keywordsOnPage);
+        };
       };
-    };
+
+
+   // });
   });
 
 
@@ -72,7 +85,7 @@ $(document).ready(function(){
   //var listings = [];
     listingDOM.classList.add("listing");
     listingDOM.innerHTML += "<h2><a href='" + listing['url'] + "' target='_blank'>" + listing['title'] + "</a></h2>";
-    listingDOM.innerHTML += "<p>" + source + "</p>";
-    listingDOM.innerHTML += "<span class='bullet'><i class='fa fa-paper-plane-o'></i></span>";
+    listingDOM.innerHTML += "<p class=\"source-site\">" + source + "</p>";
+    listingDOM.innerHTML += "<span class=\"bullet\"><i class=\"fa fa-paper-plane-o\"></i></span>";
     listings.insertBefore(listingDOM, listings.firstChild);
   }
