@@ -11,7 +11,9 @@
           "https://accounts.google.com/*",
           "https://www.googleapis.com/*",
           "notifications",
-          "https://js.pusher.com/*"
+          "https://js.pusher.com/*",
+          "https://maxcdn.bootstrapcdn.com/*",
+          "http://fonts.googleapis.com/*"
           ],
   "oauth2": {
     "client_id": "633513668424-avj1eu477g302go9jc5dd0ff3ll4hgi3.apps.googleusercontent.com",

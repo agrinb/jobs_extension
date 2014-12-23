@@ -14,8 +14,6 @@ $(document).ready(function(){
 
   var keywords = [];
   $('.add-btn').on('click', function(event){
-    console.log("JOBS --" + localStorage["jobs"]);
-    init();
     if($('#keyword').val().length > 2 ){
       keywords.push($('#keyword').val());
       $('#keyword').val("");
@@ -42,7 +40,7 @@ $(document).ready(function(){
   var port = chrome.extension.connect({name: "Job Hunter Connector"});
   
   document.addEventListener('DOMContentLoaded', function () {
-    //init();
+    init();
   });
 
   var init = function() {
@@ -51,7 +49,7 @@ $(document).ready(function(){
         //...
       } else {
         var localListings = JSON.parse(localStorage["jobs"]);
-        for (var i = 0; i < localListings.length; i++) {
+        for (var i = 0; i < 10; i++) {
           addListings(localListings[i]);
         };
       }
@@ -70,9 +68,11 @@ $(document).ready(function(){
 
   var addListings = function(listing) {    
     var listingDOM = document.createElement("div");
+    var source = listing['url'].split("/")[2];
   //var listings = [];
     listingDOM.classList.add("listing");
     listingDOM.innerHTML += "<h2><a href='" + listing['url'] + "' target='_blank'>" + listing['title'] + "</a></h2>";
-    listingDOM.innerHTML += "<span class='bullet'><img src='bullet.png'></span>";
+    listingDOM.innerHTML += "<p>" + source + "</p>";
+    listingDOM.innerHTML += "<span class='bullet'><i class='fa fa-paper-plane-o'></i></span>";
     listings.insertBefore(listingDOM, listings.firstChild);
   }
