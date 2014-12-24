@@ -3,24 +3,26 @@ $(document).ready(function(){
 
   function showTabURL(){
   chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-         $('.tab_url').html(tabs[0].url);
+         $('.tab_url').html(tabs[0].url).split("/")[2];
          console.log(tabs[0].url);
          tablink = tabs[0].url;
       });
   }
 
-  showTabURL
+  showTabURL();
 
-
+  var kState = 0;
   var keywords = [];
   $('.add-btn').on('click', function(event){
     if($('#keyword').val().length > 2 ){
       keywords.push($('#keyword').val());
       $('#keyword').val("");
     }
-    if(keywords.length == 1){
+    if(kState == 0 && keywords.length > 0){
+      $('#listing-head').remove();
       $('.listings').slideToggle(400, function(){
       showKeywords();
+      kState = 1;
       })
     } else {
       showKeywords();

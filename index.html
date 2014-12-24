@@ -31,12 +31,17 @@
 
 
         h1 {
-          border-bottom: 1px solid #DA552F;
-          color: #DA552F;
-          font-size: 25px;
-          font-weight: lighter;
-          margin: 0;
+          color:  #534540;
+          font-weight: 300;
+          font-size: 18px;
+          margin: 10px;
           padding-bottom: 10px;
+        }
+
+        h1#main-head {
+          text-align: center;
+          font-weight: 900;
+          color: #ffb347;
         }
 
         h1 a {
@@ -114,6 +119,17 @@
               0 0 0 8px rgba(255,255,255,0.4);
 
         }
+
+        h1#listing-head {
+          font-weight: 400;
+          color: #2a8ac4;
+          font-size: 14px;
+        }
+
+        p.tab-url {
+          word-wrap: break-word;
+        }
+
       </style>
 
     </head>
@@ -129,12 +145,14 @@
             data-scope="https://www.googleapis.com/auth/plus.login">
           </span>
         </span>
-  	   	<section class="main">
+  	   	<section class="main"> 
+          <h1 id="main-head"><i class="fa fa-bullseye"></i> JobSniper</h1>
   				<form class="form-2">
+            <label for="url">Target Site:</label>
             <p class="tab_url">
             </p>
   					<p class="float">
-  						<label for="login"><i class="icon-user"></i>Position desired:</label>
+  						<label for="position">Target Position:</label>
   						<input id="keyword" type="text" name="keyword" placeholder="Keyword">
   					</p>
   					<p class="clearfix">
@@ -148,7 +166,7 @@
         </ul>
       
       </div>
-      <h1 id="available-pos">Available Positions:</h1>
+      <h1 id="listing-head">Available Positions:</h1>
       <div class="listings"></div>
       <script src="js/jquery-2.1.1.min.js"></script>
       <script src="js/identity.js"></script>
