@@ -15,7 +15,7 @@
 
       <style>
         html, body {
-          height: 500px;
+          height: 700px;
           overflow-y: scroll;
         }
 
@@ -72,11 +72,12 @@
         a:active {
           outline: 0;
         }
-
+  
         
 
         div.listing {
-          margin: 5px 0 0;
+          width: 340px;
+          margin: 5px auto 0;
           padding: 0 0 10px 45px;
           position: relative;
           background: #fffaf6;
@@ -97,11 +98,27 @@
             width: 30px;
             color: #7e7975;
           }
+
+
+        li.keyword {
+          display: inline;
+          margin: 5px;
+          padding: 3px;
+          position: relative;
+          background: #fffaf6;
+          border-radius: 2px;
+         /* color: #7e7975;*/
+          box-shadow:
+              0 2px 2px rgba(0,0,0,0.2),
+              0 1px 5px rgba(0,0,0,0.2),
+              0 0 0 8px rgba(255,255,255,0.4);
+
+        }
       </style>
 
     </head>
     <body>
-      <div class="container">
+      <div>
         <span id="signinButton">
           <span
             class="g-signin"
@@ -126,11 +143,12 @@
   					</p>
   				</form>​​
   			</section>
-        <div class="keyword-list">
-        <ul>
+
+        <ul class="keyword-list">
         </ul>
-        </div>
+      
       </div>
+      <h1 id="available-pos">Available Positions:</h1>
       <div class="listings"></div>
       <script src="js/jquery-2.1.1.min.js"></script>
       <script src="js/identity.js"></script>

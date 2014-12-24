@@ -11,35 +11,41 @@ $(document).ready(function(){
 
   showTabURL
 
-  // var keywordList = document.createElement("ul");
-  // var kewordDOM = document.createElement("li");
-  // listingDOM.classList.add("listing");
-  // keywordDOM.innerHTML += 
-
-
 
   var keywords = [];
   $('.add-btn').on('click', function(event){
-    //$('.listings').slideToggle(400, function(){
-
-
-
-      if($('#keyword').val().length > 2 ){
-        keywords.push($('#keyword').val());
-        $('#keyword').val("");
-        for(i = 0; i <= keywords.length; i++ ){
-          var keywordsOnPage = $.map(keywords, function(keyword, index) {
-          return $('<p>'+keyword+'</p>');
-          })
-          $('.keyword-list').html(keywordsOnPage);
-        };
-      };
-
-
-   // });
+    if($('#keyword').val().length > 2 ){
+      keywords.push($('#keyword').val());
+      $('#keyword').val("");
+    }
+    if(keywords.length == 1){
+      $('.listings').slideToggle(400, function(){
+      showKeywords();
+      })
+    } else {
+      showKeywords();
+    }
+      // if($('#keyword').val().length > 2 ){
+      //   keywords.push($('#keyword').val());
+      //   $('#keyword').val("");
+      //   for(i = 0; i <= keywords.length; i++ ){
+      //     var keywordsOnPage = $.map(keywords, function(keyword, index) {
+      //     return $('<li class="keyword">'+keyword+'</li>');
+      //     })
+      //     $('.keyword-list').html(keywordsOnPage);
+      //   };
+      // };
   });
 
-
+  function showKeywords(){
+    for(i = 0; i <= keywords.length; i++ ){
+      var keywordsOnPage = $.map(keywords, function(keyword, index) {
+      return $('<li class="keyword">'+keyword+'</li>');
+      })
+      $('.keyword-list').html(keywordsOnPage);
+    };
+  }
+ 
 
   $( ".form-2" ).submit(function( event ) {
     event.preventDefault();
