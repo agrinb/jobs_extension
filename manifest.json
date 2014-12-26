@@ -6,6 +6,8 @@
   "version": "1.0",
   //"content_security_policy": "script-src http://localhost:3000; object-src 'self'",
   "permissions": [
+          "http://*/",
+          "activeTab",
           "tabs",
           "identity",
           "https://accounts.google.com/*",
@@ -30,4 +32,10 @@
   "background": {
     "page": "background.html"
   }
+  // "content_scripts": [
+  //   {
+  //     "matches": ["http://*/*"],
+  //     "js": ["jquery-2.1.1.min.js", "js/get-url.js"]
+  //   }
+  // ]
 }

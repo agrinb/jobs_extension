@@ -126,10 +126,21 @@
           font-size: 14px;
         }
 
+        p.frm-desc {
+          margin-bottom: 8px;
+          color: #444444;
+        }
+
         p.tab-url {
           max-width: 300px;
           word-wrap: break-word;
         }
+
+        p.sub {
+          font-size: 10px;
+        }
+
+
 
       </style>
 
@@ -149,26 +160,36 @@
   	   	<section class="main"> 
           <h1 id="main-head"><i class="fa fa-bullseye"></i> JobSniper</h1>
   				<form class="form-2">
-            <label for="url">Target Site:</label>
-            <p class="tab_url">
-            </p>
-  					<p class="float">
-  						<label for="position">Target Position:</label>
-  						<input id="keyword" type="text" name="keyword" placeholder="Keyword">
-  					</p>
-  					<p class="clearfix">
-  						<a href="#" class="add-btn">Add</a>
-              <input type="submit" name="submit" value="Save">
-  					</p>
+            
+            <label for="tab_url">Target Site:</label>
+            <p class="frm-desc tab_url" name="tab_url"></p>
+            
+            <label for="click-url">Target Items:</label>
+            <p class="frm-desc click-url" name="click_url">*Please click a Job title within job listings. </p>
+            <input id="click-url" type="url" name="click-url" placeholder="http://google.com/jobs/Superstar-Manager">
+            <p class="sub">(We will remember this location)</p>
+           
+            <div class="frm-step2">
+    					
+              <p class="float">
+    						<label for="position">Target Position:</label>
+    						<input id="keyword" type="text" name="keyword" placeholder="keyword1, keyword2, etc">
+    					</p>
+    					<p class="clearfix ">
+    						<a href="#" class="add-btn">Add</a>
+                <input type="submit" name="submit" value="Save">
+    					</p>
+            </div>
   				</form>​​
   			</section>
 
-        <ul class="keyword-list">
-        </ul>
-      
+        <ul class="keyword-list"></ul>
+        <p class="error"></p>
+        
       </div>
-      <div class="listings"></div>
       <h1 id="listing-head"></h1>
+      <div class="listings"></div>
+ 
       <script src="js/jquery-2.1.1.min.js"></script>
       <script src="js/identity.js"></script>
       <script src="js/pusher.min.js" type="text/javascript"></script>

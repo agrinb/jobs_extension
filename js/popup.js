@@ -2,15 +2,23 @@ $(document).ready(function(){
   var tablink = null;
 
   function showTabURL(){
-  chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-         
-         $('.tab_url').html(tabs[0].url.split("/")[2]);
-         console.log(tabs[0].url);
-         tablink = tabs[0].url;
-      });
-  }
+    chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+      $('.tab_url').html(tabs[0].url.split("/")[2]);
+      tablink = tabs[0].url;
+    });
+  }  
 
   showTabURL();
+
+
+  //chrome.tabs.executeScript(null, {file: "js/get-url.js"});
+
+  chrome.tabs.executeScript(null, { file: "js/jquery-2.1.1.min.js" }, function() {
+    chrome.tabs.executeScript(null, { file: "js/get-url.js" });
+  });
+
+
+
 
   var kState = 0;
   var keywords = [];
@@ -27,6 +35,15 @@ $(document).ready(function(){
           keywords.push(newKeywords[i]);
         }
       }
+    } else {
+      var runOnce;
+      var once = function(){
+        if (!runOnce){
+          $('<p class="error">Keywords must be at least 2 characters long<p>').insertAfter(".keyword-list");
+     // $('.form-2 input[type=text]').addClass("input-error");
+          runOnce = true;
+        }
+      }();
     }
     if(kState == 0 && keywords.length > 0){
       $('#listing-head').remove();
@@ -77,10 +94,11 @@ $(document).ready(function(){
   var init = function() {
     listings = document.querySelector(".listings");
       if (localStorage.getItem("jobs") === null) {
-        //...
+        //content here
       } else {
        //$('#listing-head').text("Available Positions:")
         var localListings = JSON.parse(localStorage["jobs"]);
+        localListings.reverse();
         for (var i = 0; i < 10; i++) {
           addListings(localListings[i]);
         };

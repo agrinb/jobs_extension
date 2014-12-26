@@ -145,7 +145,24 @@ a {
     font-size: 13px;
     font-weight: 400;
     display: block;
-    width: 200%;
+    width: 300px;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 3px solid #ebe6e2;
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.form-2 input[type=url] {
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    display: block;
+    width: 300px;
     padding: 5px;
     margin-bottom: 5px;
     border: 3px solid #ebe6e2;
@@ -163,6 +180,11 @@ a {
 }
 
 .form-2 input[type=text]:focus {
+    border-color: #BBB;
+    outline: none; /* Remove Chrome's outline */
+}
+
+.form-2 input[type=url]:focus {
     border-color: #BBB;
     outline: none; /* Remove Chrome's outline */
 }
@@ -227,6 +249,10 @@ a {
 .form-2 input[type=submit]:active,
 .form-2 .add-btn:active{
     top: 1px;
+}
+
+.form-2 .input-error input{
+    border-color: #ea4444;
 }
 
 /* Fallback fro broswers that don't support box shadows */

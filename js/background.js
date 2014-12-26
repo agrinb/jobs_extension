@@ -3,8 +3,8 @@
 document.addEventListener('DOMContentLoaded', function () {
   alert( "I'm here");
 });
-    
-    
+
+
     var popupPort;
     chrome.extension.onConnect.addListener(function(port) {
       popupPort = port;
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
+   
 
     var id = 0;
 		var jobs = [];
@@ -25,8 +26,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	  var channel = pusher.subscribe('1');
     channel.bind('my_event', function(data) {
-      
-    localStorage["jobs"] = JSON.stringify(data);
+    var newBatch = JSON.stringify(data);
+    for (var i = 0; i < newBatch.length; i++){
+      localStorage["jobs"].push(newBatch[i])
+    }
+    //localStorage["jobs"] = JSON.stringify(data);
     console.log("JOBS --" + localStorage["jobs"]);
     // Send post to popup if connected
     if (popupPort) {
@@ -39,19 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
       
     var opt = {
-      type: "list",
-      title: "New Jobs Discovered",
-      message: "New Jobs Discovered",
+      type: "basic",
+      title: "New Jobs Sniped",
+      message: "Open Extension to view your new jobs",
       iconUrl: "job_icon.png",
-      items: item_array
     };
 
-    opt.buttons = [{title: "View Jobs"}, {title: "Not Right Now"}]
-  
-
-
-    chrome.notifications.onButtonClicked.addListener(viewBtnClick);
-    chrome.notifications.onButtonClicked.addListener(closeBtnClick);
     chrome.notifications.create( "not"+id++, opt, function(){});
   });
 
