@@ -11,12 +11,40 @@ $(document).ready(function(){
   showTabURL();
 
 
-  //chrome.tabs.executeScript(null, {file: "js/get-url.js"});
+
 
   chrome.tabs.executeScript(null, { file: "js/jquery-2.1.1.min.js" }, function() {
     chrome.tabs.executeScript(null, { file: "js/get-url.js" });
   });
 
+
+  //get the URL from backgroound page
+  chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log("popup page received" + request.popMessage);
+    clickedUrl = request.popMessage;
+    sendResponse({message: "popup page message received"});
+    console.log("getting ready")
+  });
+
+  function showClickedUrl() {
+    console.log("starting")
+    var clickedUrl = JSON.parse(localStorage.clickedUrl).url;
+    var timeNow = JSON.parse(localStorage.clickedUrl).timeNow;
+    alert(timeNow);
+    var timePlusOne = (new Date().getTime() + (60 * 1000));
+    alert(timePlusOne -  timeNow )
+    if (timePlusOne -  timeNow < 600000) {
+      
+      $('#click-url').val(clickedUrl);
+
+      // temp //
+      console.log("finished")
+    }
+    //localStorage.setItem("clickedUrl", JSON.stringify({}));
+  } 
+
+  showClickedUrl();
 
 
 

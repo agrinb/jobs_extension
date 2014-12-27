@@ -22,13 +22,39 @@ document.addEventListener('DOMContentLoaded', function () {
       disableStats: true
     });
 
+    //get the URL from get-url.js and send to pop-up.js
+    chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+      console.log("background page received" + request.message);
+      clickedUrl = request.message;
+      //send URL to pop-up.js
+      chrome.runtime.sendMessage({popMessage: clickedUrl}, function(response) {
+         sendResponse({message: "received"});
+      });
+      var timeNow = new Date().getTime();
+      localStorage.setItem("clickedUrl", JSON.stringify({url: clickedUrl, timeNow: timeNow}));
+      console.log(localStorage["clickedUrl"]);
+
+      var opt = {
+      type: "basic",
+      title: "Link Saved!",
+      message: "Open Extension to Continue!",
+      iconUrl: "job_icon.png",
+      };
+
+      chrome.notifications.create( "not"+id++, opt, function(){});
+      //open the pop-up page
+      // chrome.tabs.create({url:"index.html"});
+    });
+
+
 
 
 	  var channel = pusher.subscribe('1');
     channel.bind('my_event', function(data) {
     var newBatch = JSON.stringify(data);
     for (var i = 0; i < newBatch.length; i++){
-      localStorage["jobs"].push(newBatch[i])
+      localStorage["jobs"].push(newBatch[i]);
     }
     //localStorage["jobs"] = JSON.stringify(data);
     console.log("JOBS --" + localStorage["jobs"]);

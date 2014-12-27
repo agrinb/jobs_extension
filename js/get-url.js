@@ -1,18 +1,9 @@
 
-
-
-// var links = document.querySelectorAll("a");
-// console.log(links);
-
-// for(var i = 0; i < links.length; i++) {
-// 	links[i].addEventListener("click", function(event){
-// 		console.log(links[i]);
-// 	})
-// }
-
-// console.log("get-url")
-alert("executed");
+console.log("get-url.js loaded");
 
 $('a').mousedown(function(){
-alert($(this).attr('href'));
+	var url = $(this).attr('href'); 
+	chrome.runtime.sendMessage({message: url}, function(response) {
+  console.log(response.message);
+	});
 });
