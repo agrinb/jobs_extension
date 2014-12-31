@@ -1,13 +1,14 @@
 var keywords = [];
 var tablink;
+var clickedUrl;
 
 $(document).ready(function(){
-  var tablink = null;
 
   function showTabURL(){
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
       $('.tab_url').html(tabs[0].url.split("/")[2]);
-      tablink = tabs[0].url;
+      tablink = tabs[0].url.split("/")[2];
+      console.log(tablink);
     });
   }  
 
@@ -31,7 +32,7 @@ $(document).ready(function(){
   });
 
   function showClickedUrl() {
-    var clickedUrl = JSON.parse(localStorage.clickedUrl).url;
+    clickedUrl = JSON.parse(localStorage.clickedUrl).url;
     var timeNow = JSON.parse(localStorage.clickedUrl).timeNow;
     var timePlusOne = (new Date().getTime() + (60 * 1000));
     if (timePlusOne -  timeNow < 600000) {
