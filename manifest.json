@@ -1,10 +1,8 @@
 {
   "manifest_version": 2,
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg3Az0NOUZ+UH9Kc37G77U541Ur8gLLYxhA/xMg1fCn+itXJ8xEjuq1IsJFYm+h2pX3YOpaUnZHrC+7ycu04uRCMOfg0yyvAS5I2g7GAIyJRxRA34qmMMCOyFaTTs4qL9evAjrsqYbPD5jKlcGteuelhtXTs/Xrcx6pK33yigbtMvMSn4F4V0bM6dnP38JaUmuPM2T3sNT4s7o3Wqbuji8Jc7HYtXAjYXegS/SibkoY49m1MYV9Ds7XMzFaUKXJdVQYwBLmuJWV8ifcx4fwnkh6MyW5IPcoQ85yvMzynmJ1nIwd6HA+Jr9LfWMm3v3QrMf2XaBPtN4w8kjh2alQ4dDwIDAQAB",
   "name": "Job Alerts",
   "description": "This extension helps you find a job",
-  "version": "1.0",
-  //"content_security_policy": "script-src http://localhost:3000; object-src 'self'",
+  "version": "1.2.4",
   "permissions": [
           "http://*/",
           "activeTab",
@@ -18,7 +16,7 @@
           "http://fonts.googleapis.com/*"
           ],
   "oauth2": {
-    "client_id": "633513668424-avj1eu477g302go9jc5dd0ff3ll4hgi3.apps.googleusercontent.com",
+    "client_id": "858545004399-tlfkq1hfdbktductlb0qdvjds4s949gt.apps.googleusercontent.com",
     "scopes": [ "https://www.googleapis.com/auth/plus.login" ,
                 "https://www.googleapis.com/auth/plus.profile.emails.read",
                 "https://www.googleapis.com/auth/userinfo.email",
@@ -32,10 +30,4 @@
   "background": {
     "page": "background.html"
   }
-  // "content_scripts": [
-  //   {
-  //     "matches": ["http://*/*"],
-  //     "js": ["jquery-2.1.1.min.js", "js/get-url.js"]
-  //   }
-  // ]
 }

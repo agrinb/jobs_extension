@@ -28,23 +28,17 @@ $(document).ready(function(){
   });
 
   function showClickedUrl() {
-    console.log("starting")
     var clickedUrl = JSON.parse(localStorage.clickedUrl).url;
     var timeNow = JSON.parse(localStorage.clickedUrl).timeNow;
-    alert(timeNow);
     var timePlusOne = (new Date().getTime() + (60 * 1000));
-    alert(timePlusOne -  timeNow )
     if (timePlusOne -  timeNow < 600000) {
-      
       $('#click-url').val(clickedUrl);
-
-      // temp //
-      console.log("finished")
     }
-    //localStorage.setItem("clickedUrl", JSON.stringify({}));
   } 
 
-  showClickedUrl();
+  if (localStorage.getItem("clickedUrl") !== null) {
+    showClickedUrl();
+  }
 
 
 

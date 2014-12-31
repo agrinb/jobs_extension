@@ -9,7 +9,7 @@
   return a.hostname;
   }
 
-
+  console.log(interactive);
   function xhrWithAuth(method, url, interactive, callback) {
     var access_token;
 
@@ -17,7 +17,7 @@
 
     function getToken() {
       chrome.identity.getAuthToken({ interactive: interactive }, function(token) {
-        console.log(intereactive)
+        console.log(intereactive);
         if (chrome.runtime.lastError) {
           callback(chrome.runtime.lastError);
           return;
