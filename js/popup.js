@@ -1,3 +1,6 @@
+var keywords = [];
+var tablink;
+
 $(document).ready(function(){
   var tablink = null;
 
@@ -43,7 +46,7 @@ $(document).ready(function(){
 
 
   var kState = 0;
-  var keywords = [];
+ 
   $('.add-btn').on('click', function(event){
     var inputString = $('#keyword').val()
     if(inputString.length > 2 ){
@@ -87,6 +90,8 @@ $(document).ready(function(){
       //   };
       // };
   });
+
+
 
   function showKeywords(){
     for(i = 0; i <= keywords.length; i++ ){

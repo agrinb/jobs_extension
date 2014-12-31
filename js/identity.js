@@ -9,21 +9,23 @@
   return a.hostname;
   }
 
-  console.log(interactive);
+
   function xhrWithAuth(method, url, interactive, callback) {
     var access_token;
 
     var retry = true;
 
     function getToken() {
+      console.log(keywords);
       chrome.identity.getAuthToken({ interactive: interactive }, function(token) {
-        console.log(intereactive);
+        console.log("token   "+ token);
         if (chrome.runtime.lastError) {
           callback(chrome.runtime.lastError);
           return;
         }
 
         access_token = token;
+        console.log("at "+access_token);
         requestStart();
       });
     }
@@ -73,7 +75,11 @@
         success: function(result){
           console.log(result);
           },
-        dataType: "application/json"
+        dataType: "application/json",
+        error: function (xhr, ajaxOptions, thrownError) {
+          alert(xhr.status);
+          alert(thrownError);
+        },
       });
 
 

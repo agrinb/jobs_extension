@@ -1,8 +1,9 @@
 {
   "manifest_version": 2,
   "name": "Job Alerts",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhC78HpMcNYv4RiTekpahXRf17WQDwIQjxf9tmS3sWfcAIi47I2rPv9y6vdqSMJIzqyUfjfyIVMmyOA+IYvkgv2iS2fU8zLchn6MTexksTDWJvkUXiQhA8KRWdFjwSHdKaVwNzx3ue5O18JAkxJwxo1qeEOJtm0r2ZO9m98hyHcYqgSFXSDmEtLS6349n+XFDngt5oW6/glL8XFV99PdA2mspV0vYKlJrTTB+5S3Tvwsg+0liYXheMopzMl0wMraUZqc5hL/7hQDVnPFI14Ye7F0/THeTCgG3ahU6i4I+Drc2aTTj36wKDby56dVbmvR4dHwWtZyKZvHaXQTEPk6VQwIDAQAB",  
   "description": "This extension helps you find a job",
-  "version": "1.2.4",
+  "version": "1.2.4.1",
   "permissions": [
           "http://*/",
           "activeTab",
