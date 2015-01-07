@@ -55,6 +55,7 @@
   }
 
   function getUserInfo(interactive) {
+    console.log("getUserInfo");
     xhrWithAuth('GET',
                 'https://www.googleapis.com/plus/v1/people/me',
                 interactive,
@@ -62,19 +63,20 @@
   }
 
   function onUserInfoFetched(error, status, response) {
+    console.log('onUserInfoFetched');
     if (!error && status == 200) {
       user_info = JSON.parse(response);
       user_uid = user_info.id;
       user_email = user_info.emails[0]["value"];
 
-      debugger;
+      
 
       $.ajax({
         type: "POST",
         url: "http://localhost:3000/companies",
         //data: {uid: user_uid, keywords: keywords, url: tablink, user_email: user_email },
 
-        data: { uid: user_uid, keywords: keywords, url: tablink, name: tablink, job_url: clickedUrl},
+        data: { uid: user_uid, keywords: keywords, url: sourceUrl, name: tablink, job_url: clickedUrl},
         success: function(result){
           console.log(result);
           },

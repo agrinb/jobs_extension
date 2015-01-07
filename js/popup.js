@@ -1,20 +1,20 @@
 var keywords = [];
 var tablink;
 var clickedUrl;
+var sourceUrl;
 
 $(document).ready(function(){
 
   function showTabURL(){
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
       $('.tab_url').html(tabs[0].url.split("/")[2]);
+      sourceUrl = tabs[0].url;
       tablink = tabs[0].url.split("/")[2];
       console.log(tablink);
     });
   }  
 
   showTabURL();
-
-
 
 
   chrome.tabs.executeScript(null, { file: "js/jquery-2.1.1.min.js" }, function() {
@@ -104,11 +104,21 @@ $(document).ready(function(){
   }
  
 
-  $( ".form-2" ).submit(function( event ) {
+  // $(".form-2").submit(function( event ) {
+  //   event.preventDefault();
+  //   var interactive = true;
+  //   getUserInfo(interactive);
+  //   console.log(submit);
+  // });  
+
+  $("[name='submit']").click(function( event ) {
     event.preventDefault();
     var interactive = true;
     getUserInfo(interactive);
+    console.log('submit');
   });  
+
+
 });
 
 
