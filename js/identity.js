@@ -62,6 +62,15 @@
                 onUserInfoFetched);
   }
 
+  function retrieveSourceUrl (){
+    if (localStorage.getItem("sourceUrl") !== null || compareTimeSourceUrl()) {
+      var sourceUrl = JSON.parse(localStorage.getItem("sourceUrl"))['url'];
+      localStorage.setItem("sourceUrl", null)
+      return sourceUrl;
+    }
+  }
+
+
   function onUserInfoFetched(error, status, response) {
     console.log('onUserInfoFetched');
     if (!error && status == 200) {
@@ -76,7 +85,7 @@
         url: "http://localhost:3000/companies",
         //data: {uid: user_uid, keywords: keywords, url: tablink, user_email: user_email },
 
-        data: { uid: user_uid, keywords: keywords, url: sourceUrl, name: tablink, job_url: clickedUrl},
+        data: { uid: user_uid, keywords: keywords, url: retrieveSourceUrl(), name: tablink, job_url: clickedUrl},
         success: function(result){
           console.log(result);
           },

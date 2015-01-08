@@ -1,21 +1,37 @@
 var keywords = [];
 var tablink;
 var clickedUrl;
-var sourceUrl;
+
 
 $(document).ready(function(){
 
   function showTabURL(){
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
       $('.tab_url').html(tabs[0].url.split("/")[2]);
-      sourceUrl = tabs[0].url;
       tablink = tabs[0].url.split("/")[2];
-      console.log(tablink);
     });
   }  
 
-  showTabURL();
+  $('.lock-btn').on('click', function(event){
+    event.preventDefault();
+    chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+      var sourceUrl = tabs[0].url;
+      var timeNow = new Date().getTime();
+      localStorage.setItem("sourceUrl", JSON.stringify({url: sourceUrl, timeNow: timeNow}));
+    });
+  })
 
+
+
+  function compareTimeSourceUrl () {
+    var timeNow = new Date().getTime();
+    var sourceUrlTime = JSON.parse(localStorage.getItem("sourceUrl"))["timeNow"];
+    console.log(timeNow - 120000 > sourceUrlTime);
+    return (timeNow - 120000 > sourceUrlTime);
+  }
+
+
+  showTabURL();
 
   chrome.tabs.executeScript(null, { file: "js/jquery-2.1.1.min.js" }, function() {
     chrome.tabs.executeScript(null, { file: "js/get-url.js" });
