@@ -1,6 +1,6 @@
 'use strict';
   
-  
+
 
   var user_info = null, user_uid = null, user_email = null;
 
@@ -78,6 +78,11 @@
       user_info = JSON.parse(response);
       user_uid = user_info.id;
       user_email = user_info.emails[0]["value"];
+      localStorage.setItem("userUID", JSON.stringify({id: user_uid}));
+      var userUID = JSON.parse(localStorage.getItem("userUID"));
+      userUID = userUID['id']
+      console.log(userUID);
+      alert(userUID);
 
       
 
@@ -96,7 +101,6 @@
           alert(thrownError);
         },
       });
-
 
     } else {
       //changeState(STATE_START);

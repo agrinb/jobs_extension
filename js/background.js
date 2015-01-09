@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
   //
 });
 
-
     var popupPort;
     chrome.extension.onConnect.addListener(function(port) {
       popupPort = port;
@@ -47,15 +46,26 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-
-
-	  var channel = pusher.subscribe(user_uid);
-    channel.bind('jobs_json', function(data) {
-    var newBatch = JSON.stringify(data);
-    for (var i = 0; i < newBatch.length; i++){
-      localStorage["jobs"].push(newBatch[i]);
+    // chrome.runtime.onMessage.addListener(
+    // function(request, sender, sendResponse) {
+    //   console.log("background page received" + request.userUID);
+    //   user_uid = request.userUID;
+    // }
+    if (localStorage.getItem("userUID") !== null) {
+      var userUID = JSON.parse(localStorage.getItem("userUID"))['id'];
     }
-    //localStorage["jobs"] = JSON.stringify(data);
+
+	  var channel = pusher.subscribe(userUID);
+    channel.bind('jobs_json', function(data) {
+      var newBatch = JSON.stringify(data);
+      if (localStorage.getItem("jobs") !== null) {
+        var oldJobs = JSON.parse(localStorage.getItem("jobs"));
+        for (var i = 0; i < newBatch.length; i++){
+          oldJobs.push(newBatch[i]);
+        }
+      } else {
+         oldJobs = JSON.stringify(data);
+      }
     console.log("JOBS --" + localStorage["jobs"]);
     // Send post to popup if connected
     if (popupPort) {
@@ -64,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var item_array = new Array();
     for (var i = 0; i < 10; i++) {
-      item_array.push({ title: data[i]['title'], message: ""});
+      item_array.push({ title: newBatch[i]['title'], message: ""});
     }
       
     var opt = {

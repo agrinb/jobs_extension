@@ -23,7 +23,7 @@
                 "https://www.googleapis.com/auth/userinfo.email",
                 "email"]
   },
-  "content_security_policy": "script-src 'self' https://js.pusher.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com https://js.pusher.com; object-src 'self'",
   "browser_action": {
     "default_icon": "job_icon.png",
     "default_popup": "index.html"

@@ -2,8 +2,33 @@ var keywords = [];
 var tablink;
 var clickedUrl;
 
+  function setUID(error, status, response) {
+    alert('setUID');
+    if (!error && status == 200) {
+      user_info = JSON.parse(response);
+      user_uid = user_info.id;
+      chrome.runtime.sendMessage({userUID: user_uid}, function(response) {
+         sendResponse({message: "received"});
+      });
+    }
+  }
 
-$(document).ready(function(){
+
+function signinCallback(authResult) {
+  if (authResult['status']['signed_in']) {
+    console.log("ran");
+    console.log(authResult['status']);
+    document.getElementById('signinButton').setAttribute('style', 'display: none');
+  } else {
+    // Update the app to reflect a signed out user
+    // Possible error values:
+    //   "user_signed_out" - User is signed-out
+    //   "access_denied" - User denied access to your app
+    //   "immediate_failed" - Could not automatically log in the user
+    console.log('Sign-in state: ' + authResult['error']);
+  }
+}
+
 
   function showTabURL(){
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
@@ -106,7 +131,6 @@ $(document).ready(function(){
       //     $('.keyword-list').html(keywordsOnPage);
       //   };
       // };
-  });
 
 
 
