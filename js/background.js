@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
    
-
     var id = 0;
 		var jobs = [];
 	  var pusher = new Pusher('2089ef65bd0d820cb915', {
@@ -50,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-	  var channel = pusher.subscribe('1');
-    channel.bind('my_event', function(data) {
+	  var channel = pusher.subscribe(user_uid);
+    channel.bind('jobs_json', function(data) {
     var newBatch = JSON.stringify(data);
     for (var i = 0; i < newBatch.length; i++){
       localStorage["jobs"].push(newBatch[i]);
