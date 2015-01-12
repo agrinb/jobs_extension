@@ -2,7 +2,9 @@
   
 
 
-  var user_info = null, user_uid = null, user_email = null;
+  var user_info;
+  var userUID; 
+  var user_email;
 
   function url_domain(url) {
   var    a      = document.createElement('a');
@@ -63,37 +65,25 @@
                 onUserInfoFetched);
   }
 
-  function retrieveSourceUrl (){
-    if (localStorage.getItem("sourceUrl") !== null || compareTimeSourceUrl()) {
-      var sourceUrl = JSON.parse(localStorage.getItem("sourceUrl"))['url'];
-      localStorage.setItem("sourceUrl", null)
-      return sourceUrl;
-    }
-  }
-
 
   function onUserInfoFetched(error, status, response) {
     console.log('onUserInfoFetched');
     if (!error && status == 200) {
       user_info = JSON.parse(response);
-      user_uid = user_info.id;
+      userUID = user_info.id;
       user_email = user_info.emails[0]["value"];
-      localStorage.setItem("userUID", JSON.stringify({id: user_uid}));
-      var userUID = JSON.parse(localStorage.getItem("userUID"));
-      userUID = userUID['id']
-      console.log(userUID);
-      alert(userUID);
-
-      
-
+      localStorage.setItem("userUID", JSON.stringify({id: userUID}));
+   
       $.ajax({
         type: "POST",
+        //url: "https://job-sniper.herokuapp.com/companies",
         url: "http://localhost:3000/companies",
-        //data: {uid: user_uid, keywords: keywords, url: tablink, user_email: user_email },
+    
 
-        data: { uid: user_uid, keywords: keywords, url: retrieveSourceUrl(), name: tablink, job_url: clickedUrl},
+        data: { uid: userUID, keywords: keywords, url: tabUrl, name: tabUrl},
         success: function(result){
           console.log(result);
+          alert("Well Done")
           },
         dataType: "application/json",
         error: function (xhr, ajaxOptions, thrownError) {

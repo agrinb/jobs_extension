@@ -14,7 +14,8 @@
           "notifications",
           "https://js.pusher.com/*",
           "https://maxcdn.bootstrapcdn.com/*",
-          "http://fonts.googleapis.com/*"
+          "http://fonts.googleapis.com/*", 
+          "https://job-sniper.herokuapp.com/*"
           ],
   "oauth2": {
     "client_id": "858545004399-tlfkq1hfdbktductlb0qdvjds4s949gt.apps.googleusercontent.com",

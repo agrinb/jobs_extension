@@ -1,17 +1,8 @@
 var keywords = [];
-var tablink;
+var tabUrl;
 var clickedUrl;
 
-  function setUID(error, status, response) {
-    alert('setUID');
-    if (!error && status == 200) {
-      user_info = JSON.parse(response);
-      user_uid = user_info.id;
-      chrome.runtime.sendMessage({userUID: user_uid}, function(response) {
-         sendResponse({message: "received"});
-      });
-    }
-  }
+
 
 
 function signinCallback(authResult) {
@@ -33,19 +24,9 @@ function signinCallback(authResult) {
   function showTabURL(){
     chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
       $('.tab_url').html(tabs[0].url.split("/")[2]);
-      tablink = tabs[0].url.split("/")[2];
+      tabUrl = tabs[0].url;
     });
   }  
-
-  $('.lock-btn').on('click', function(event){
-    event.preventDefault();
-    chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-      var sourceUrl = tabs[0].url;
-      var timeNow = new Date().getTime();
-      localStorage.setItem("sourceUrl", JSON.stringify({url: sourceUrl, timeNow: timeNow}));
-    });
-  })
-
 
 
   function compareTimeSourceUrl () {
@@ -58,10 +39,6 @@ function signinCallback(authResult) {
 
   showTabURL();
 
-  chrome.tabs.executeScript(null, { file: "js/jquery-2.1.1.min.js" }, function() {
-    chrome.tabs.executeScript(null, { file: "js/get-url.js" });
-  });
-
 
   //get the URL from backgroound page
   chrome.runtime.onMessage.addListener(
@@ -71,20 +48,6 @@ function signinCallback(authResult) {
     sendResponse({message: "popup page message received"});
     console.log("getting ready")
   });
-
-  function showClickedUrl() {
-    clickedUrl = JSON.parse(localStorage.clickedUrl).url;
-    var timeNow = JSON.parse(localStorage.clickedUrl).timeNow;
-    var timePlusOne = (new Date().getTime() + (60 * 1000));
-    if (timePlusOne -  timeNow < 600000) {
-      $('#click-url').val(clickedUrl);
-    }
-  } 
-
-  if (localStorage.getItem("clickedUrl") !== null) {
-    showClickedUrl();
-  }
-
 
 
   var kState = 0;
@@ -184,12 +147,7 @@ function signinCallback(authResult) {
         availablePos.innerHTML += "<span>Available Positions:</span>";
         listings.insertBefore(availablePos, listings.firstChild);
       }
-    // $.getJSON("http://realtime-producthunt.herokuapp.com/posts?" + Date.now(), function(posts) {
-    // // Reverse posts
-    // posts.reverse();
-      
-    // });
-
+   
     // // Listen for realtime updates from background process
     port.onMessage.addListener(function(post) {
       console.log("+++ MESAGE RECEIVED +++");
@@ -199,6 +157,7 @@ function signinCallback(authResult) {
 
   var addListings = function(listing) {    
     var listingDOM = document.createElement("div");
+    debugger;
     var source = listing['url'].split("/")[2];
   //var listings = [];
     listingDOM.classList.add("listing");
@@ -207,3 +166,7 @@ function signinCallback(authResult) {
     listingDOM.innerHTML += "<span class=\"bullet\"><i class=\"fa fa-paper-plane-o\"></i></span>";
     listings.insertBefore(listingDOM, listings.firstChild);
   }
+
+
+
+

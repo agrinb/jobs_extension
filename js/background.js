@@ -20,37 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
       disableStats: true
     });
 
-    //get the URL from get-url.js and send to pop-up.js
-    chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-      console.log("background page received" + request.message);
-      clickedUrl = request.message;
-      //send URL to pop-up.js
-      chrome.runtime.sendMessage({popMessage: clickedUrl}, function(response) {
-         sendResponse({message: "received"});
-      });
-      var timeNow = new Date().getTime();
-      localStorage.setItem("clickedUrl", JSON.stringify({url: clickedUrl, timeNow: timeNow}));
-      console.log(localStorage["clickedUrl"]);
 
-      var opt = {
-      type: "basic",
-      title: "Link Saved!",
-      message: "Open Extension to Continue!",
-      iconUrl: "job_icon.png",
-      };
-
-      chrome.notifications.create( "not"+id++, opt, function(){});
-      //open the pop-up page
-      // chrome.tabs.create({url:"index.html"});
-    });
-
-
-    // chrome.runtime.onMessage.addListener(
-    // function(request, sender, sendResponse) {
-    //   console.log("background page received" + request.userUID);
-    //   user_uid = request.userUID;
-    // }
     if (localStorage.getItem("userUID") !== null) {
       var userUID = JSON.parse(localStorage.getItem("userUID"))['id'];
     }
@@ -86,14 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     chrome.notifications.create( "not"+id++, opt, function(){});
   });
-
-  function viewBtnClick(){
-      console.log("View button clicked");
-  }
-  function closeBtnClick(){
-    console.log("Close Button Clicked")
-  }
-
 
 // Enable Pusher logging - don't include this in production
 Pusher.log = function(message) {
