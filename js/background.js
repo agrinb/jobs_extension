@@ -28,24 +28,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	  var channel = pusher.subscribe(userUID);
     channel.bind('jobs_json', function(data) {
       var newBatch = JSON.stringify(data);
-      if (localStorage.getItem("jobs") !== null) {
-        var oldJobs = JSON.parse(localStorage.getItem("jobs"));
-        for (var i = 0; i < newBatch.length; i++){
-          oldJobs.push(newBatch[i]);
-        }
-      } else {
-         oldJobs = JSON.stringify(data);
-      }
-    console.log("JOBS --" + localStorage["jobs"]);
-    // Send post to popup if connected
-    if (popupPort) {
-      popupPort.postMessage("new data received");
-    }
+      localStorage.setItem("jobs", newBatch)
+    
+    // if (popupPort) {
+    //   popupPort.postMessage("jobs received");
+    // }
 
-    var item_array = new Array();
-    for (var i = 0; i < 10; i++) {
-      item_array.push({ title: newBatch[i]['title'], message: ""});
-    }
+    // var item_array = new Array();
+    // for (var i = 0; i < 10; i++) {
+    //   item_array.push({ title: newBatch[i]['title'], message: ""});
+    // }
       
     var opt = {
       type: "basic",

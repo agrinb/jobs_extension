@@ -118,7 +118,7 @@ function signinCallback(authResult) {
     event.preventDefault();
     var interactive = true;
     getUserInfo(interactive);
-    console.log('submit');
+    parent.close();
   });  
 
 
