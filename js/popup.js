@@ -4,7 +4,7 @@ var tabUrl;
 
 function signinCallback(authResult) {
   if (authResult['status']['signed_in']) {
-    //console.log("ran");
+    //git .log("ran");
     // console.log(authResult['status']);
     document.getElementById('signinButton').setAttribute('style', 'display: none');
     init();

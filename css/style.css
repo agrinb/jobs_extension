@@ -1,7 +1,10 @@
 /* General Demo Style */
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 
-html { height: 100%; }
+ html, body {
+          height: 700px;
+          overflow-y: scroll;
+        }
 
 body {
     font-family: 'Lato', Calibri, Arial, sans-serif;
@@ -12,7 +15,125 @@ body {
     -webkit-font-smoothing: antialiased;
     overflow-y: scroll;
     overflow-x: hidden;
+    margin: 0;
+    min-width: 400px;
+    overflow-x: hidden;
+    padding: 20px;
 }
+
+
+
+h1 {
+  color:  #534540;
+  font-weight: 300;
+  font-size: 18px;
+  margin: 10px;
+  padding-bottom: 10px;
+}
+
+
+h1#main-head {
+  text-align: center;
+  font-weight: 900;
+  color: #ffb347;
+}
+
+h1 a {
+  color: #3FACC1;
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+h2 {
+  padding: 0px 10px;
+  color: #534540;
+  font-size: 13px;
+  margin: 0;
+}
+
+p.source-site {
+  color: #999;
+  font-size: 11px;
+  margin: 0;
+  padding-left: 10px;
+}
+
+a {
+  color: inherit;
+  outline: 0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:active {
+  outline: 0;
+}
+
+
+
+div.listing {
+  width: 340px;
+  margin: 5px auto 0;
+  padding: 0 0 10px 45px;
+  position: relative;
+  background: #fffaf6;
+  border-radius: 4px;
+ /* color: #7e7975;*/
+  box-shadow:
+      0 2px 2px rgba(0,0,0,0.2),
+      0 1px 5px rgba(0,0,0,0.2),
+      0 0 0 8px rgba(255,255,255,0.4);
+}
+
+span.bullet {
+    float: left;
+    height: 30px;
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    width: 30px;
+    color: #7e7975;
+  }
+
+
+li.keyword {
+  display: inline;
+  margin: 5px;
+  padding: 3px;
+  position: relative;
+  background: #fffaf6;
+  border-radius: 2px;
+ /* color: #7e7975;*/
+  box-shadow:
+      0 2px 2px rgba(0,0,0,0.2),
+      0 1px 5px rgba(0,0,0,0.2),
+      0 0 0 8px rgba(255,255,255,0.4);
+
+}
+
+h1#listing-head {
+  font-weight: 400;
+  color: #2a8ac4;
+  font-size: 14px;
+}
+
+p.frm-desc {
+  margin-bottom: 8px;
+  color: #444444;
+}
+
+p.tab-url {
+  max-width: 300px;
+  word-wrap: break-word;
+}
+
+p.sub {
+  font-size: 10px;
+}
+
 
 a {
     color: #555;
