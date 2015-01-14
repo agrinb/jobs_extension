@@ -41,13 +41,13 @@ function signinCallback(authResult) {
 
 
   //get the URL from backgroound page
-  chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    console.log("popup page received" + request.popMessage);
-    clickedUrl = request.popMessage;
-    sendResponse({message: "popup page message received"});
-    console.log("getting ready")
-  });
+  // chrome.runtime.onMessage.addListener(
+  // function(request, sender, sendResponse) {
+  //   console.log("popup page received" + request.popMessage);
+  //   clickedUrl = request.popMessage;
+  //   sendResponse({message: "popup page message received"});
+  //   console.log("getting ready")
+  // });
 
 
   var kState = 0;
@@ -123,14 +123,7 @@ function signinCallback(authResult) {
 
 
 });
-
-
-
-  var port = chrome.extension.connect({name: "Job Hunter Connector"});
   
-  document.addEventListener('DOMContentLoaded', function () {
-    init();
-  });
 
   var init = function() {
     listings = document.querySelector(".listings");
@@ -148,11 +141,6 @@ function signinCallback(authResult) {
         listings.insertBefore(availablePos, listings.firstChild);
       }
    
-    // // Listen for realtime updates from background process
-    port.onMessage.addListener(function(post) {
-      console.log("+++ MESAGE RECEIVED +++");
-      //addPost(post);
-    });
   };
 
   var addListings = function(listing) {    
@@ -167,6 +155,11 @@ function signinCallback(authResult) {
     listings.insertBefore(listingDOM, listings.firstChild);
   }
 
-
-
+  chrome.runtime.onConnect.addListener(function(port) {
+    port.onMessage.addListener(function(msg) {
+      if (msg.note == "no new jobs") {
+        alert("Hoorah");
+      } 
+    });
+  });
 

@@ -1,18 +1,4 @@
 
-// Run as soon as the document's DOM is ready.
-document.addEventListener('DOMContentLoaded', function () {
-  //
-});
-
-    var popupPort;
-    chrome.extension.onConnect.addListener(function(port) {
-      popupPort = port;
-
-      popupPort.onDisconnect.addListener(function() {
-        popupPort = undefined;
-      });
-    });
-
    
     var id = 0;
 		var jobs = [];
@@ -27,17 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	  var channel = pusher.subscribe(userUID);
     channel.bind('jobs_json', function(data) {
-      var newBatch = JSON.stringify(data);
-      localStorage.setItem("jobs", newBatch)
-    
-    // if (popupPort) {
-    //   popupPort.postMessage("jobs received");
-    // }
+      if (data['status'] === "false") {
+        var port = chrome.runtime.connect({name: "jobnotice"});
+        port.postMessage({note: "no new jobs"});
+        console.log("connecting");
+      } else {
+        var newBatch = JSON.stringify(data);
+        localStorage.setItem("jobs", newBatch)
+      }
 
-    // var item_array = new Array();
-    // for (var i = 0; i < 10; i++) {
-    //   item_array.push({ title: newBatch[i]['title'], message: ""});
-    // }
       
     var opt = {
       type: "basic",
