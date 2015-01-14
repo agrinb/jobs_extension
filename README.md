@@ -7,7 +7,7 @@ Chrome Extension to Alert You When Specific Positions Become Avaialable
 
 The quick brown fox jumped over the lazy
 dog's back.
-### Install here: 
+### Install here: https://chrome.google.com/webstore/detail/jobsniper/gncmkinmiecbhdagcelpalalkcdnfplg?hl=en&gl=US
 
 ### How To Use: 
 1. Install App
