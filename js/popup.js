@@ -1,8 +1,5 @@
 var keywords = [];
 var tabUrl;
-var clickedUrl;
-
-
 
 
 function signinCallback(authResult) {
@@ -10,6 +7,7 @@ function signinCallback(authResult) {
     console.log("ran");
     console.log(authResult['status']);
     document.getElementById('signinButton').setAttribute('style', 'display: none');
+    init();
   } else {
     // Update the app to reflect a signed out user
     // Possible error values:
@@ -21,79 +19,52 @@ function signinCallback(authResult) {
 }
 
 
-  function showTabURL(){
-    chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
-      $('.tab_url').html(tabs[0].url.split("/")[2]);
-      tabUrl = tabs[0].url;
-    });
-  }  
+function showTabURL(){
+  chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
+    $('.tab_url').html(tabs[0].url.split("/")[2]);
+    tabUrl = tabs[0].url;
+  });
+}  
+
+showTabURL();
 
 
-  function compareTimeSourceUrl () {
-    var timeNow = new Date().getTime();
-    var sourceUrlTime = JSON.parse(localStorage.getItem("sourceUrl"))["timeNow"];
-    console.log(timeNow - 120000 > sourceUrlTime);
-    return (timeNow - 120000 > sourceUrlTime);
-  }
 
 
-  showTabURL();
+var kState = 0;
 
-
-  //get the URL from backgroound page
-  // chrome.runtime.onMessage.addListener(
-  // function(request, sender, sendResponse) {
-  //   console.log("popup page received" + request.popMessage);
-  //   clickedUrl = request.popMessage;
-  //   sendResponse({message: "popup page message received"});
-  //   console.log("getting ready")
-  // });
-
-
-  var kState = 0;
- 
-  $('.add-btn').on('click', function(event){
-    var inputString = $('#keyword').val()
-    if(inputString.length > 2 ){
-    //if($('#keyword').val().length > 2 ){
-      if(inputString.indexOf(',') === -1){
-        keywords.push($('#keyword').val());
-        $('#keyword').val("");
-      } else {
-        var newKeywords = inputString.split(",");
-        for (var i = 0; i < newKeywords.length; i++){ 
-          keywords.push(newKeywords[i]);
-        }
+$('.add-btn').on('click', function(event){
+  var inputString = $('#keyword').val()
+  if(inputString.length > 2 ){
+  //if($('#keyword').val().length > 2 ){
+    if(inputString.indexOf(',') === -1){
+      keywords.push($('#keyword').val());
+      $('#keyword').val("");
+    } else {
+      var newKeywords = inputString.split(",");
+      for (var i = 0; i < newKeywords.length; i++){ 
+        keywords.push(newKeywords[i]);
       }
-    } else {
-      var runOnce;
-      var once = function(){
-        if (!runOnce){
-          $('<p class="error">Keywords must be at least 2 characters long<p>').insertAfter(".keyword-list");
-     // $('.form-2 input[type=text]').addClass("input-error");
-          runOnce = true;
-        }
-      }();
     }
-    if(kState == 0 && keywords.length > 0){
-      $('#listing-head').remove();
-      $('.listings').slideToggle(400, function(){
-      showKeywords();
-      kState = 1;
-      })
-    } else {
-      showKeywords();
-    }
-      // if($('#keyword').val().length > 2 ){
-      //   keywords.push($('#keyword').val());
-      //   $('#keyword').val("");
-      //   for(i = 0; i <= keywords.length; i++ ){
-      //     var keywordsOnPage = $.map(keywords, function(keyword, index) {
-      //     return $('<li class="keyword">'+keyword+'</li>');
-      //     })
-      //     $('.keyword-list').html(keywordsOnPage);
-      //   };
-      // };
+  } else {
+    var runOnce;
+    var once = function(){
+      if (!runOnce){
+        $('<p class="error">Keywords must be at least 2 characters long<p>').insertAfter(".keyword-list");
+   // $('.form-2 input[type=text]').addClass("input-error");
+        runOnce = true;
+      }
+    }();
+  }
+  if(kState == 0 && keywords.length > 0){
+    $('#listing-head').remove();
+    $('.listings').slideToggle(400, function(){
+    showKeywords();
+    kState = 1;
+    })
+  } else {
+    showKeywords();
+  }
 
 
 
@@ -107,18 +78,10 @@ function signinCallback(authResult) {
   }
  
 
-  // $(".form-2").submit(function( event ) {
-  //   event.preventDefault();
-  //   var interactive = true;
-  //   getUserInfo(interactive);
-  //   console.log(submit);
-  // });  
-
-  $("[name='submit']").click(function( event ) {
+  $(".form-2").submit(function( event ) {
     event.preventDefault();
     var interactive = true;
     getUserInfo(interactive);
-    parent.close();
   });  
 
 
