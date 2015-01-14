@@ -16,7 +16,7 @@
       if (data['status'] === "false") {
         var port = chrome.runtime.connect({name: "jobnotice"});
         port.postMessage({note: "no new jobs"});
-        console.log("connecting");
+        //console.log("connecting");
       } else {
         var newBatch = JSON.stringify(data);
         localStorage.setItem("jobs", newBatch)

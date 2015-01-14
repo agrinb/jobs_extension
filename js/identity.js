@@ -20,7 +20,6 @@
     var retry = true;
 
     function getToken() {
-      console.log(keywords);
       chrome.identity.getAuthToken({ interactive: interactive }, function(token) {
         console.log("token   "+ token);
         if (chrome.runtime.lastError) {
@@ -29,7 +28,6 @@
         }
 
         access_token = token;
-        console.log("at "+access_token);
         requestStart();
       });
     }
@@ -58,7 +56,6 @@
   }
 
   function getUserInfo(interactive) {
-    console.log("getUserInfo");
     xhrWithAuth('GET',
                 'https://www.googleapis.com/plus/v1/people/me',
                 interactive,
@@ -76,14 +73,13 @@
    
       $.ajax({
         type: "POST",
-        //url: "https://job-sniper.herokuapp.com/companies",
-        url: "http://localhost:3000/companies",
+        url: "https://job-sniper.herokuapp.com/companies",
+        //url: "http://localhost:3000/companies",
     
 
         data: { uid: userUID, keywords: keywords, url: tabUrl, name: tabUrl},
         success: function(result){
-          console.log(result);
-          alert("Well Done")
+          //console.log(result);
           },
         dataType: "application/json",
         error: function (xhr, ajaxOptions, thrownError) {

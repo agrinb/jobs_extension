@@ -4,8 +4,8 @@ var tabUrl;
 
 function signinCallback(authResult) {
   if (authResult['status']['signed_in']) {
-    console.log("ran");
-    console.log(authResult['status']);
+    //console.log("ran");
+    // console.log(authResult['status']);
     document.getElementById('signinButton').setAttribute('style', 'display: none');
     init();
   } else {
@@ -121,7 +121,7 @@ $('.add-btn').on('click', function(event){
   chrome.runtime.onConnect.addListener(function(port) {
     port.onMessage.addListener(function(msg) {
       if (msg.note == "no new jobs") {
-        alert("Hoorah");
+       // alert("Hoorah");
       } 
     });
   });
